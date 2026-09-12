@@ -36,3 +36,4 @@ All analysis will use publicly available information, principally company annual
 ## Disclaimer
 
 This is an independent educational project. It is not affiliated with QinetiQ Group plc and is not investment advice.
+

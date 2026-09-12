@@ -1,0 +1,20 @@
+# Excel temporary and lock files
+~$*.xlsx
+~$*.xlsm
+*.tmp
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+
+# Python, if later used for data collection
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Editor settings
+.vscode/
+.idea/
+
