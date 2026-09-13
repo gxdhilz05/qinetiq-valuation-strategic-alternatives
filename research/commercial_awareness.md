@@ -1,55 +1,53 @@
 # Commercial-awareness notes
 
-Keep each section to roughly 3–5 evidence-backed bullets. The purpose is to connect outside developments to QinetiQ's revenue, margins, cash flow, or valuation.
+These are the external issues that can change QinetiQ's revenue, margins, cash flow or valuation.
 
-## Defence budgets
+## 1. Defence spending
 
-- What is changing in UK, NATO, US, and Australian defence spending?
-- Which spending categories are relevant to QinetiQ?
-- How quickly can announced budgets become signed contracts?
+Higher UK and allied defence budgets are a demand tailwind, particularly for test and evaluation, training and readiness, mission systems, cyber, autonomy and directed energy. However, a budget announcement is not revenue. Funding must be allocated, QinetiQ must win a contract, and the work must be performed. [S002]
 
-## Changing defence technology
+**Watch:** contract awards, order intake excluding unusual LTPA extensions, book-to-bill and funded backlog.
 
-- Drones and counter-drone systems
-- Cyber and intelligence
-- Autonomy and artificial intelligence
-- Test and evaluation of increasingly complex systems
-- Directed-energy weapons
+## 2. Technology and readiness
 
-## Government procurement
+Modern systems are becoming more software-heavy, autonomous and interconnected. That increases the need for independent testing, assurance, cyber protection and realistic training—areas relevant to QinetiQ. Faster technology cycles can support demand but also require continued investment.
 
-- Budget and contract-award delays
-- Fixed-price versus cost-reimbursable contracts
-- Security and regulatory barriers
-- Customer concentration and political priorities
+**Watch:** wins in autonomy, electronic warfare, cyber, digital test and evaluation, directed energy and training.
 
-## Labour and cost inflation
+## 3. Government procurement
 
-- Availability and cost of specialist engineers
-- Ability to pass inflation through to customers
-- Effect on operating margins and delivery schedules
+The main commercial risk is timing: governments can announce priorities while contract awards or funding are delayed. Contract type also matters. Fixed-price work can produce losses if delivery costs rise; cost-reimbursable work protects margins better but may earn a lower return.
 
-## Interest rates and valuation
+**Watch:** delayed awards, under-contract revenue, contract provisions, segment margins and cash conversion.
 
-- Effect of rates on WACC and DCF value
-- Effect on acquisition financing and capital allocation
-- Difference between operational impact and valuation impact
+## 4. Skilled labour and inflation
 
-## Capital allocation
+QinetiQ depends on cleared scientists and engineers. Scarcity or wage inflation can delay delivery and reduce margins unless costs can be passed to customers.
 
-- Organic investment
-- Acquisitions and disposals
-- Debt repayment
-- Dividends and share buybacks
-- Whether management has historically created value
+**Watch:** employee numbers, utilisation, restructuring charges and EMEA margin.
 
-## Foreign exchange
+## 5. Interest rates
 
-- Which currencies matter?
-- Translation versus transaction effects
-- Why reported growth can differ from organic growth
+Higher rates affect QinetiQ in two ways:
 
-## Monthly conclusion
+- They increase interest cost on floating-rate debt.
+- They increase WACC, reducing DCF value even if operations are unchanged.
 
-[State the two external developments that currently matter most to QinetiQ and explain the financial transmission mechanism.]
+Operational balance-sheet risk is limited by FY26 net leverage of 0.5x EBITDA, but valuation remains rate-sensitive. [S001, S006]
 
+## 6. Capital allocation
+
+Management can reinvest, acquire businesses, repay debt, pay dividends or repurchase shares. Buybacks create value per share only when shares are bought below intrinsic value and the business does not sacrifice better investments. Previous US impairments mean acquisition discipline must be tested, not assumed. [S001, S004]
+
+**Watch:** buyback price, share count, acquisition/disposal proceeds, leverage and return on invested capital.
+
+## 7. Foreign exchange
+
+The main currencies are sterling, US dollars and Australian dollars. Currency changes can alter reported revenue and profit when overseas results are translated into sterling, even if local operations are unchanged. Use constant-currency growth when judging operations and reported figures when valuing actual sterling cash flows. [S006]
+
+## 8. The two issues that matter most now
+
+1. **US strategic review:** the outcome could remove a weak operation and expose the quality of EMEA, or crystallise poor acquisition value if proceeds disappoint.
+2. **Backlog conversion and FY27 execution:** the large funded backlog supports visibility, but value is created only if contracts become profitable revenue and cash.
+
+These two issues will drive the scenarios. Broader defence-spending headlines are supporting evidence, not the investment conclusion.
