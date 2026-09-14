@@ -28,7 +28,7 @@ jobs:
           from openpyxl.styles import Font, PatternFill, Border, Side, Alignment
           from openpyxl.comments import Comment
           from openpyxl.utils import get_column_letter
-from openpyxl.workbook.properties import CalcProperties
+          from openpyxl.workbook.properties import CalcProperties
 
           path = Path("model/QinetiQ_Valuation_Model.xlsx")
           wb = load_workbook(path, keep_links=True)
