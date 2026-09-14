@@ -28,6 +28,7 @@ jobs:
           from openpyxl.styles import Font, PatternFill, Border, Side, Alignment
           from openpyxl.comments import Comment
           from openpyxl.utils import get_column_letter
+from openpyxl.workbook.properties import CalcProperties
 
           path = Path("model/QinetiQ_Valuation_Model.xlsx")
           wb = load_workbook(path, keep_links=True)
@@ -189,7 +190,9 @@ jobs:
           ws.page_setup.fitToHeight = 1
           ws.sheet_properties.pageSetUpPr.fitToPage = True
 
-          wb.calculation.fullCalcOnLoad = True
+          if wb.calculation is None:
+    wb.calculation = CalcProperties()
+wb.calculation.fullCalcOnLoad = True
           wb.calculation.forceFullCalc = True
           wb.calculation.calcMode = "auto"
           wb.save(path)
