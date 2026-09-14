@@ -27,7 +27,7 @@ images/         Selected model outputs used in the presentation
 
 ## Current status
 
-Step 1 — company background research and source collection.
+Historical financial statements and segment analysis are complete. The initial FY27–FY31 operating assumptions are documented in [research/forecast_assumptions.md](research/forecast_assumptions.md). The next step is to implement the formula-driven forecast in Excel.
 
 ## Data policy
 
@@ -36,4 +36,3 @@ All analysis will use publicly available information, principally company annual
 ## Disclaimer
 
 This is an independent educational project. It is not affiliated with QinetiQ Group plc and is not investment advice.
-
