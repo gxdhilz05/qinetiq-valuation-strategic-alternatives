@@ -191,8 +191,8 @@ jobs:
           ws.sheet_properties.pageSetUpPr.fitToPage = True
 
           if wb.calculation is None:
-    wb.calculation = CalcProperties()
-wb.calculation.fullCalcOnLoad = True
+              wb.calculation = CalcProperties()
+          wb.calculation.fullCalcOnLoad = True
           wb.calculation.forceFullCalc = True
           wb.calculation.calcMode = "auto"
           wb.save(path)
