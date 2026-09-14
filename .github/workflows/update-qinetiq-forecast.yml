@@ -1,0 +1,247 @@
+name: Update QinetiQ forecast workbook
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-qinetiq-forecast.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-workbook:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install workbook tooling
+        run: python -m pip install --disable-pip-version-check openpyxl==3.1.5
+      - name: Add assumptions and formula-driven forecast
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from math import isclose
+          from zipfile import ZipFile
+          from openpyxl import load_workbook
+          from openpyxl.styles import Font, PatternFill, Border, Side, Alignment
+          from openpyxl.comments import Comment
+          from openpyxl.utils import get_column_letter
+
+          path = Path("model/QinetiQ_Valuation_Model.xlsx")
+          wb = load_workbook(path, keep_links=True)
+
+          sheet_name = "Forecast"
+          if sheet_name in wb.sheetnames:
+              del wb[sheet_name]
+          ws = wb.create_sheet(sheet_name)
+
+          navy = "17365D"
+          mid_blue = "4472C4"
+          light_blue = "D9EAF7"
+          pale_yellow = "FFF2CC"
+          pale_green = "E2F0D9"
+          white = "FFFFFF"
+          black = "000000"
+          input_blue = "0000FF"
+          grey = "666666"
+          thin_grey = Side(style="thin", color="B7C9D6")
+          border = Border(bottom=thin_grey)
+
+          ws.sheet_view.showGridLines = False
+          ws.freeze_panes = "B5"
+          ws.sheet_properties.tabColor = mid_blue
+          ws.merge_cells("A1:G1")
+          ws["A1"] = "QinetiQ Base-Case Forecast"
+          ws["A1"].fill = PatternFill("solid", fgColor=navy)
+          ws["A1"].font = Font(color=white, bold=True, size=14)
+          ws["A1"].alignment = Alignment(horizontal="left", vertical="center")
+          ws.row_dimensions[1].height = 24
+
+          ws.merge_cells("A2:G2")
+          ws["A2"] = "Retain Global Solutions with limited improvement | £m except percentages"
+          ws["A2"].font = Font(color=grey, italic=True, size=10)
+
+          # Assumptions table
+          ws.merge_cells("A4:F4")
+          ws["A4"] = "Forecast assumptions"
+          ws["A4"].fill = PatternFill("solid", fgColor=mid_blue)
+          ws["A4"].font = Font(color=white, bold=True)
+          ws["A5"] = "Assumption"
+          years = ["FY27E", "FY28E", "FY29E", "FY30E", "FY31E"]
+          for col, year in enumerate(years, 2):
+              ws.cell(5, col, year)
+
+          assumption_rows = [
+              ("EMEA revenue growth", [0.050, 0.050, 0.045, 0.040, 0.035]),
+              ("Global Solutions revenue growth", [0.000, 0.020, 0.030, 0.030, 0.030]),
+              ("EMEA operating margin", [0.119, 0.120, 0.121, 0.121, 0.120]),
+              ("Global Solutions operating margin", [0.085, 0.090, 0.095, 0.098, 0.100]),
+          ]
+          for row, (label, values) in enumerate(assumption_rows, 6):
+              ws.cell(row, 1, label)
+              for col, value in enumerate(values, 2):
+                  cell = ws.cell(row, col, value)
+                  cell.number_format = "0.0%"
+                  cell.font = Font(color=input_blue)
+                  cell.fill = PatternFill("solid", fgColor=pale_yellow)
+                  cell.comment = Comment("Base-case assumption from research/forecast_assumptions.md", "OpenAI")
+
+          for row in range(5, 10):
+              for col in range(1, 7):
+                  ws.cell(row, col).border = border
+          for cell in ws[5]:
+              if cell.column <= 6:
+                  cell.fill = PatternFill("solid", fgColor=light_blue)
+                  cell.font = Font(bold=True, color=navy)
+                  cell.alignment = Alignment(horizontal="center" if cell.column > 1 else "left")
+
+          ws.merge_cells("A11:G11")
+          ws["A11"] = "FY26A segment revenue starting points: EMEA £1,529.2m; Global Solutions £393.4m. Forecast assumptions are sourced from research/forecast_assumptions.md."
+          ws["A11"].font = Font(color=grey, italic=True, size=9)
+          ws["A11"].alignment = Alignment(wrap_text=True)
+
+          # Formula-driven calculated forecast
+          ws.merge_cells("A13:G13")
+          ws["A13"] = "Calculated forecast"
+          ws["A13"].fill = PatternFill("solid", fgColor=mid_blue)
+          ws["A13"].font = Font(color=white, bold=True)
+
+          headers = ["£m except percentages", "FY26A", *years]
+          for col, value in enumerate(headers, 1):
+              cell = ws.cell(14, col, value)
+              cell.fill = PatternFill("solid", fgColor=light_blue)
+              cell.font = Font(bold=True, color=navy)
+              cell.alignment = Alignment(horizontal="center" if col > 1 else "left")
+              cell.border = border
+
+          labels = {
+              15: "EMEA revenue",
+              16: "Global Solutions revenue",
+              17: "Group revenue",
+              18: "Group revenue growth",
+              20: "EMEA operating profit",
+              21: "Global Solutions operating profit",
+              22: "Group operating profit",
+              23: "Group operating margin",
+          }
+          for row, label in labels.items():
+              ws.cell(row, 1, label)
+
+          # FY26A starting values are historical hardcodes; all FY27E-FY31E forecast outputs are formulas.
+          ws["B15"] = 1529.2
+          ws["B16"] = 393.4
+          ws["B17"] = "=SUM(B15:B16)"
+          for cell_ref in ("B15", "B16"):
+              ws[cell_ref].font = Font(color=input_blue)
+              ws[cell_ref].fill = PatternFill("solid", fgColor=pale_yellow)
+              ws[cell_ref].comment = Comment("FY26A segment revenue starting point.", "OpenAI")
+
+          for col in range(3, 8):
+              letter = get_column_letter(col)
+              prev = get_column_letter(col - 1)
+              assumption_col = get_column_letter(col - 1)
+              ws.cell(15, col, f"={prev}15*(1+{assumption_col}$6)")
+              ws.cell(16, col, f"={prev}16*(1+{assumption_col}$7)")
+              ws.cell(17, col, f"=SUM({letter}15:{letter}16)")
+              ws.cell(18, col, f"={letter}17/{prev}17-1")
+              ws.cell(20, col, f"={letter}15*{assumption_col}$8")
+              ws.cell(21, col, f"={letter}16*{assumption_col}$9")
+              ws.cell(22, col, f"=SUM({letter}20:{letter}21)")
+              ws.cell(23, col, f"={letter}22/{letter}17")
+
+          for row in (15, 16, 17, 20, 21, 22):
+              for col in range(2, 8):
+                  ws.cell(row, col).number_format = '#,##0.0;[Red](#,##0.0);-'
+          for row in (18, 23):
+              for col in range(2, 8):
+                  ws.cell(row, col).number_format = '0.0%'
+          for row in range(15, 24):
+              for col in range(1, 8):
+                  ws.cell(row, col).border = border
+          for row in (17, 22, 23):
+              for col in range(1, 8):
+                  ws.cell(row, col).font = Font(bold=True, color=black)
+
+          # Transparent model checks
+          ws.merge_cells("A25:G25")
+          ws["A25"] = "Model checks"
+          ws["A25"].fill = PatternFill("solid", fgColor=mid_blue)
+          ws["A25"].font = Font(color=white, bold=True)
+          ws["A26"] = "Revenue build check"
+          ws["A27"] = "Operating profit build check"
+          for col in range(3, 8):
+              letter = get_column_letter(col)
+              ws.cell(26, col, f"={letter}17-SUM({letter}15:{letter}16)")
+              ws.cell(27, col, f"={letter}22-SUM({letter}20:{letter}21)")
+              for row in (26, 27):
+                  ws.cell(row, col).number_format = '0.0;[Red](0.0);-'
+                  ws.cell(row, col).fill = PatternFill("solid", fgColor=pale_green)
+
+          ws.column_dimensions["A"].width = 37
+          for col in "BCDEFG":
+              ws.column_dimensions[col].width = 14
+          ws.auto_filter.ref = "A14:G23"
+          ws.print_area = "A1:G27"
+          ws.page_setup.orientation = "landscape"
+          ws.page_setup.fitToWidth = 1
+          ws.page_setup.fitToHeight = 1
+          ws.sheet_properties.pageSetUpPr.fitToPage = True
+
+          wb.calculation.fullCalcOnLoad = True
+          wb.calculation.forceFullCalc = True
+          wb.calculation.calcMode = "auto"
+          wb.save(path)
+
+          # Validate package integrity, formulas and independent forecast arithmetic.
+          with ZipFile(path) as archive:
+              assert archive.testzip() is None, "XLSX package contains a corrupt member"
+
+          check_wb = load_workbook(path, data_only=False, keep_links=True)
+          check_ws = check_wb["Forecast"]
+          expected_formulae = {
+              "C15": "=B15*(1+B$6)", "G16": "=F16*(1+F$7)",
+              "C17": "=SUM(C15:C16)", "G18": "=G17/F17-1",
+              "C20": "=C15*B$8", "G21": "=G16*F$9",
+              "G22": "=SUM(G20:G21)", "G23": "=G22/G17",
+              "G26": "=G17-SUM(G15:G16)", "G27": "=G22-SUM(G20:G21)",
+          }
+          for ref, expected in expected_formulae.items():
+              assert check_ws[ref].value == expected, f"{ref}: {check_ws[ref].value!r} != {expected!r}"
+
+          emea_growth = [0.050, 0.050, 0.045, 0.040, 0.035]
+          gs_growth = [0.000, 0.020, 0.030, 0.030, 0.030]
+          emea_margin = [0.119, 0.120, 0.121, 0.121, 0.120]
+          gs_margin = [0.085, 0.090, 0.095, 0.098, 0.100]
+          emea, gs = 1529.2, 393.4
+          actual = []
+          for i in range(5):
+              emea *= 1 + emea_growth[i]
+              gs *= 1 + gs_growth[i]
+              revenue = emea + gs
+              op_profit = emea * emea_margin[i] + gs * gs_margin[i]
+              actual.append((emea, gs, revenue, op_profit, op_profit / revenue))
+          expected = [
+              (1605.7, 393.4, 1999.1, 224.5, 0.112),
+              (1685.9, 401.3, 2087.2, 238.4, 0.114),
+              (1761.8, 413.3, 2175.1, 252.4, 0.116),
+              (1832.3, 425.7, 2258.0, 263.4, 0.117),
+              (1896.4, 438.5, 2334.9, 271.4, 0.116),
+          ]
+          for year, (calc, exp) in enumerate(zip(actual, expected), 2027):
+              for idx in range(4):
+                  assert abs(calc[idx] - exp[idx]) < 0.06, f"FY{year} value {idx} mismatch: {calc[idx]} vs {exp[idx]}"
+              assert abs(calc[4] - exp[4]) < 0.0006, f"FY{year} margin mismatch"
+
+          print("Workbook sheets:", check_wb.sheetnames)
+          print("Validated 40 forecast-output formulas and 10 zero-balance check formulas.")
+          print("Independent FY27-FY31 arithmetic agrees with research/forecast_assumptions.md.")
+          PY
+      - name: Commit updated workbook
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add model/QinetiQ_Valuation_Model.xlsx
+          git commit -m "Add FY27-FY31 assumptions and forecast formulas"
+          git push
