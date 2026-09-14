@@ -1,6 +1,6 @@
 # Project checklist
 
-## 1. Understand the company
+## 1. Understand the company and the project question : What is Qinetiq worth on a standalone basis, and which strategic option for the US business would maximise shareholder value?
 
 - [ ] Explain QinetiQ's products and services in plain English
 - [ ] Identify its principal customers and geographies
@@ -10,6 +10,12 @@
 - [ ] Summarise the US operating issues and strategic review
 - [ ] Record all sources in `research/sources.csv`
 
+## Initial Hypotheses
+- EMEA is the higher quality core business.
+- The US business may be depressing the group's valuation.
+- Backlog provides revenue visibility but must convert into cash.
+- A US sale might unlock value but only if the price is attractive.
+  
 ## 2. Collect and clean historical data
 
 - [ ] Income statement
