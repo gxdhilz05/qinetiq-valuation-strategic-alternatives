@@ -13,6 +13,17 @@ QinetiQ is a defence and security technology company. It earns money by providin
 
 In FY26, approximately 96% of QinetiQ's revenue came from service contracts. [S006]
 
+### FY26 revenue by capability
+
+| Capability | Revenue share |
+|---|---:|
+| Engineering services | 34% |
+| Mission support and operations | 27% |
+| Test and training | 26% |
+| Research and development | 13% |
+
+This mix reinforces that QinetiQ is primarily a specialist services and technology business rather than a major platform manufacturer. [S006]
+
 ## History
 
 QinetiQ originated from DERA (the Defence Evaluation and Research Agency) in 2001. When DERA was divided into QinetiQ and Dstl, highly sensitive activities remained inside government and became Dstl. Most of the remaining activities became QinetiQ, which was subsequently privatised. In 2006, it was listed on the London Stock Exchange. [S005]
@@ -91,6 +102,8 @@ Revenue is recorded as QinetiQ performs its contractual obligations.
 Cash may be collected before or after revenue is recognised.
 
 At the end of FY26, QinetiQ had £4.421bn of funded backlog. Approximately £1.347bn was expected to become FY27 revenue, with the remainder scheduled for later years. [S004, S006]
+
+Reported FY26 order intake was £3.573bn because it included the unusually large LTPA extension. Management's adjusted book-to-bill was 1.14x. We should use the adjusted measure when judging recurring demand so that one major contract extension does not distort the trend. [S001, S004]
 
 ## Business segments
 
@@ -196,6 +209,8 @@ Our initial primary valuation peers are:
 4. **CACI:** US defence and intelligence technology, but with a different growth and margin profile.
 5. **Booz Allen Hamilton:** government technology, cyber and consulting, but with greater consulting exposure and often a higher valuation.
 
+Secondary reference peers include Parsons, Chemring and Cohort. BAE Systems, Lockheed Martin and RTX are useful broader sector references, but they are not ideal core peers because they manufacture large platforms and products.
+
 We will compare the peers using:
 
 - Revenue growth
@@ -221,6 +236,10 @@ Higher interest rates can increase interest expense on floating-rate debt, incre
 
 QinetiQ reports in pounds but earns revenue in US and Australian dollars. Currency movements can therefore change reported financial results even when the underlying local operations have not changed. We must distinguish between reported growth, organic growth and constant-currency growth.
 
+### Capital allocation
+
+QinetiQ can use cash for organic investment, acquisitions, debt repayment, dividends or share buybacks. The previous US impairments mean acquisition discipline must be assessed rather than assumed. Buybacks create value per share only if the shares are repurchased below intrinsic value and the company is not sacrificing a better use of the cash.
+
 ## Current FY27 guidance
 
 Management currently expects:
@@ -237,6 +256,23 @@ These are benchmarks to test rather than assumptions we should automatically cop
 Potential catalysts include a favourable US strategic-review outcome, major contract wins, successful backlog conversion, sustained EMEA margins, strong cash conversion and value-creating share buybacks.
 
 The main risks are UK government concentration, procurement delays, contract cost overruns, further US impairments, a disappointing US sale price, labour-cost pressure, weak cash conversion and poor future acquisitions.
+
+## KPIs to monitor
+
+The model and strategic review will focus on:
+
+- EMEA and Global Solutions revenue growth
+- Segment operating margins
+- Order intake and adjusted book-to-bill
+- Funded backlog and its conversion into revenue
+- Cash conversion and free cash flow
+- Net debt and leverage
+- US contract awards, restructuring costs and further impairments
+- Share count and the price paid for buybacks
+
+## Why QinetiQ is suitable for this project
+
+QinetiQ has enough public information to build a proper model, two segments with contrasting performance and a live strategic decision concerning the US business. It can therefore be assessed using a DCF, trading comparables, sum-of-the-parts valuation and strategic scenarios. It is also less generic than analysing a large platform manufacturer.
 
 ## Selection justification
 
