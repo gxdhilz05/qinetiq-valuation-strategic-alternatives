@@ -79,6 +79,22 @@ The one-off costs must be shown separately rather than hidden inside the operati
 
 The restructuring case creates value only if the present value of the later improvement in profit and UFCF exceeds the present value of the £25m gross implementation cost and the cash lost through short-term revenue disruption. The DCF calculation should determine the answer; the assumptions should not be chosen to force restructuring to win.
 
+## DCF result
+
+The formula-driven model applies the same 8.6% WACC, 2.0% terminal-growth rate, £159.1m net debt and 522.1m diluted shares as the base case. This isolates the value effect of the operating assumptions rather than mixing the strategic comparison with different valuation parameters.
+
+| £m except per-share data | Base case | Restructuring case | Change |
+|---|---:|---:|---:|
+| FY27 UFCF | 174.2 | 159.5 | (14.7) |
+| FY31 UFCF | 210.4 | 212.8 | 2.4 |
+| Present value of explicit-period UFCF | 787.8 | 768.1 | (19.7) |
+| Present value of terminal value | 2,247.5 | 2,272.8 | 25.3 |
+| Enterprise value | 3,035.3 | 3,040.9 | 5.5 |
+| Equity value | 2,876.2 | 2,881.8 | 5.5 |
+| Implied value per share | £5.51 | £5.52 | £0.01 |
+
+On these assumptions, restructuring creates only approximately £5.5m of enterprise value, or £0.01 per share. The result is effectively neutral: the higher long-run margin and FY31 cash flow are largely offset by the £25m gross cash cost and weaker near-term revenue. This is strategically useful because it shows that a second restructuring phase is not an obvious value-creation answer and supports retaining a sale or other strategic alternative as a live option.
+
 ## Interview explanation
 
 “I treated restructuring as an incremental second phase because QinetiQ had already reduced headcount, disposed of Federal IT and exited low-return work. I therefore assumed temporary revenue disruption and £25m of further gross cash costs, followed by a gradual margin recovery towards the segment's historical 10-11% range. I kept the one-off costs separate from the recurring margin so I could compare the present value of the turnaround benefits with the upfront cash investment without double counting.”
